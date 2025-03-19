@@ -9,19 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('membre_juris', function (Blueprint $table) {
+        $table->id();
+        $table->integer('score');
+        $table->text('comment')->nullable();
+        $table->foreignId('juri_id')->constrained('juris');
+        $table->timestamps();
+    });
+}
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        //
     }
 };
