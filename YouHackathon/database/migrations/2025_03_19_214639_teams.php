@@ -9,19 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('name');
+            $table->foreignId('edition_id')->nullable()->constrained('editions');
+            $table->foreignId('project_id')->nullable()->constrained('projects');
+            $table->foreignId('juri_id')->nullable()->constrained('juris');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

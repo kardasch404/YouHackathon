@@ -9,11 +9,6 @@ class Juri extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'juri'=> [],
-        'teams'=> [],
-    ];
-
     public function team ()
     {
         return $this->hasMany(Team::class);

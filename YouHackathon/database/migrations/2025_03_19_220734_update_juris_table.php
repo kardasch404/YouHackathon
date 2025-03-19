@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('editions', function (Blueprint $table) {
-            $table->id();
+        Schema::table('juris', function (Blueprint $table) {
+            //
             $table->timestamps();
         });
     }
@@ -22,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('editions');
+        Schema::table('juris', function (Blueprint $table) {
+            //
+            $table->dropTimestamps();
+        });
     }
 };
