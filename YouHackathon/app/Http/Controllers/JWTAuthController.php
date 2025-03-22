@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -18,8 +20,16 @@ class JWTAuthController extends Controller
             'email' =>$request['email'],
             'password' =>Hash::make($request['password']),
             'firstname' =>$request['firstname'],
-            'lastname' =>$request['lastname'],
+            'lastname' =>$request['lastname']
         ]);
+
+        $roleUser = Role::where('name', 'user')->first();
+
+        if ($roleUser) {
+            // نربط المستخدم مباشرة بالدور `user`
+            $user->roles()->attach($roleUser->id);
+        }
+    
 
         $token = JWTAuth::fromUser($user);
         return response()->json([
