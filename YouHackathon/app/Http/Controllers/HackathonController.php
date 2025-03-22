@@ -68,4 +68,32 @@ class HackathonController extends Controller
             ], 500);
         }
     }
+
+    public function updatehackathon(Request $request, $id)
+    {
+        $hackathon = Hackathon::find($id);
+        if (!$hackathon) {
+            return response()->json([
+                'message' => 'Hackathon not found'
+            ], 404);
+        }
+        $hackathon->update([
+            'name'=>$request->name,
+            'description'=>$request->description,
+        ]);
+        return response()->json([
+            'message' => 'Hackathon updated succes',
+            'hackathon' => $hackathon
+        ], 200);
+    }
+
+    public function getHackathons()
+    {
+        $hackathons = Hackathon::all();
+        return response()->json([
+            'hackathons' => $hackathons
+        ], 200);
+    }
 }
+
+
