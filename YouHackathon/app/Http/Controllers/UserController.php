@@ -29,6 +29,14 @@ class UserController extends Controller
                     'message' => 'Role not found'
                 ], 404);
             }
+
+            if($user->roles()->where('roles.id', $request->role_id)->exists())
+            {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'user has already this role'
+                ], 400);
+            }
             $user->roles()->attach($request->role_id);
             $roles = $user->roles()->get(['roles.id', 'roles.name']);;
 
