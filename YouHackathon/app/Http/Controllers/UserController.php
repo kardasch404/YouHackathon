@@ -34,7 +34,7 @@ class UserController extends Controller
             {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'user has already this role'
+                    'message' => 'user has already this'
                 ], 400);
             }
             $user->roles()->attach($request->role_id);

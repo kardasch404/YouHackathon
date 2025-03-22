@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\HackathonController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\Hackathon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,12 @@ Route::get('getAllRole', [RoleController::class, 'getAllRole']);
 // ======================================================================= //
 
 Route::post('addUserRole', [UserController::class, 'addUserRole']);
+
+
+// =========================-> Hackthon <-===================================== //
+// ======================================================================= //
+
+Route::post('createHackathon', [HackathonController::class, 'createHackathon']);
 
 
 
