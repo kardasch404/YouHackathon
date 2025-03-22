@@ -52,6 +52,8 @@ Route::post('addUserRole', [UserController::class, 'addUserRole']);
 
 Route::post('createHackathon', [HackathonController::class, 'createHackathon']);
 Route::delete('deleteHackathon/{id}', [HackathonController::class, 'deleteHackathon']);
+Route::put('updatehackathon/{id}', [HackathonController::class, 'updatehackathon']);
+Route::get('getHackathons', [HackathonController::class, 'getHackathons']);
 
 
 
