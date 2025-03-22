@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,23 @@ Route::post('create', [RoleController::class, 'create']);
 Route::delete('delete\{id}', [RoleController::class, 'delete']);
 Route::put('update/{id}', [RoleController::class, 'update']);
 Route::get('getAllRole', [RoleController::class, 'getAllRole']);
+
+
+
+// =========================-> User <-===================================== //
+// ======================================================================= //
+
+Route::post('addUserRole', [UserController::class, 'addUserRole']);
+
+
+
+
+
+
+
+
+
+
+
+
+
