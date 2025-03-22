@@ -11,7 +11,7 @@ class RoleController extends Controller
 
     public function create(Request $request)
     {
-       $role = Role::create([
+        $role = Role::create([
             'name' => $request->name
         ]);
         return response()->json([
@@ -20,14 +20,27 @@ class RoleController extends Controller
         ]);
     }
 
-    public function delete($id)
+    public function deleteRole($id)
     {
-        $role = Role::find($id);
-        $role->delete();
-        return response()->json([
-            'message' => 'Role deleted success',
-            'role' => $role
-        ]);
+        try {
+            $role = Role::find($id);
+            if (!$role) {
+                return response()->json([
+                    'message' => 'Role not found'
+                ], 404);
+            }
+
+            $role->delete();
+
+            return response()->json([
+                'message' => 'Role deleted success'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error deleting role',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
     public function update(Request $request, $id)
     {
@@ -44,7 +57,7 @@ class RoleController extends Controller
     {
         $role = Role::all();
         return response()->json([
-            "message" => $role  
+            "message" => $role
         ]);
     }
 }

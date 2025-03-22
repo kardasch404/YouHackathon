@@ -35,7 +35,7 @@ Route::post('logout', [JWTAuthController::class, 'logout']);
 // ======================================================================= //
 
 Route::post('create', [RoleController::class, 'create']);
-Route::delete('delete\{id}', [RoleController::class, 'delete']);
+Route::delete('delete/{id}', [RoleController::class, 'delete']);
 Route::put('update/{id}', [RoleController::class, 'update']);
 Route::get('getAllRole', [RoleController::class, 'getAllRole']);
 
@@ -51,6 +51,9 @@ Route::post('addUserRole', [UserController::class, 'addUserRole']);
 // ======================================================================= //
 
 Route::post('createHackathon', [HackathonController::class, 'createHackathon']);
+Route::delete('deleteHackathon/{id}', [HackathonController::class, 'deleteHackathon']);
+
+
 
 
 

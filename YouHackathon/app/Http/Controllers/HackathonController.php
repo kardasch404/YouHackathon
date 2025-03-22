@@ -43,4 +43,29 @@ class HackathonController extends Controller
             ], 500);
         }
     }
+
+
+
+    public function deleteHackathon($id)
+    {
+        try {
+            $hackathon = Hackathon::find($id);
+            if (!$hackathon) {
+                return response()->json([
+                    'message' => 'Hackathon not found'
+                ], 404);
+            }
+            $hackathon->delete();
+    
+            return response()->json([
+                'message' => 'Hackathon deleted succes',
+                'hackathon' => $hackathon
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error deleting hackathon',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
