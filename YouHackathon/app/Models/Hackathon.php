@@ -20,4 +20,8 @@ class Hackathon extends Model
     {
         return $this->hasMany(Edition::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
