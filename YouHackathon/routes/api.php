@@ -46,6 +46,7 @@ Route::get('getAllRole', [RoleController::class, 'getAllRole']);
 // ======================================================================= //
 
 Route::post('addUserRole', [UserController::class, 'addUserRole']);
+Route::post('participierAuxEdition/{userId}/{editionId}', [UserController::class, 'participierAuxEdition']);
 
 
 // =========================-> Hackthon <-===================================== //

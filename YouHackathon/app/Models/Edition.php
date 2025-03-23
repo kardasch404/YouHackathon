@@ -17,18 +17,21 @@ class Edition extends Model
         'endDate',
     ];
 
-    public function team ()
+    public function team()
     {
         return $this->hasMany(Team::class);
     }
-    public function user ()
+    public function user()
     {
         return $this->hasMany(User::class);
     }
 
-    public function hackathon ()
+    public function hackathon()
     {
         return $this->belongsTo(Hackathon::class);
     }
-
+    public function participants()
+    {
+        return $this->belongsToMany(User::class, 'edition_participants');
+    }
 }
