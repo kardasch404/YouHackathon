@@ -84,4 +84,48 @@ class EditionController extends Controller
             ], 500);
         }
     }
+
+    public function updateEdition(Request $request, $userId, $editionId)
+    {
+        try {
+            $user = User::find($userId);
+            if (!$user) {
+                return response()->json([
+                    'message' => 'User not found'
+                ], 404);
+            }
+            $isOrganiser = $user->roles()->where('name', 'organiser')->exists();
+            if (! $isOrganiser) {
+                return response()->json([
+                    'message' => 'User is not an organizer'
+                ], 404);
+            }
+            $edition = Edition::find($editionId);
+            if (!$edition) {
+                return response()->json([
+                    'message' => 'Edition not found'
+                ], 404);
+            }
+            if ($edition->organiser_id != $userId) {
+                return response()->json([
+                    'message' => 'User is not authorized to update this edition'
+                ], 403);
+            }
+            $edition->theme = $request->theme;
+            $edition->year = $request->year;
+            $edition->lieu = $request->lieu;
+            $edition->startDate = $request->startDate;
+            $edition->endDate = $request->endDate;
+            $edition->save();
+            return response()->json([
+                'message' => 'Edition updated success',
+                'edition' => $edition
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Edition not updated',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

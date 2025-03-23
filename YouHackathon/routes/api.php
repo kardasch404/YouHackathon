@@ -64,6 +64,7 @@ Route::get('getHackathons', [HackathonController::class, 'getHackathons']);
 
 Route::post('createEdition/{id}', [EditionController::class, 'createEdition']);
 Route::delete('deleteEdition/{userId}/{editionId}', [EditionController::class, 'deleteEdition']);
+Route::put('updateEdition/{userId}/{editionId}', [EditionController::class, 'updateEdition']);
 
 
 
