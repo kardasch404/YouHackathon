@@ -4,6 +4,7 @@ use App\Http\Controllers\EditionController;
 use App\Http\Controllers\HackathonController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use App\Models\Hackathon;
 use Illuminate\Http\Request;
@@ -67,6 +68,10 @@ Route::post('createEdition/{id}', [EditionController::class, 'createEdition']);
 Route::delete('deleteEdition/{userId}/{editionId}', [EditionController::class, 'deleteEdition']);
 Route::put('updateEdition/{userId}/{editionId}', [EditionController::class, 'updateEdition']);
 
+
+// =========================-> Team <-===================================== //
+// ======================================================================= //
+Route::post('createTeam/{userId}/{editionId}', [TeamController::class, 'createTeam']);
 
 
 
