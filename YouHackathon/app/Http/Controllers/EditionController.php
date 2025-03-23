@@ -46,4 +46,42 @@ class EditionController extends Controller
             ], 500);
         }
     }
+
+    public function deleteEdition($userId, $editionId)
+    {
+        try {
+            $user = User::find($userId);
+            if (!$user) {
+                return response()->json([
+                    'message' => 'User not found'
+                ], 404);
+            }
+            $isOrganiser = $user->roles()->where('name', 'organiser')->exists();
+            if (! $isOrganiser) {
+                return response()->json([
+                    'message' => 'User is not an organizer'
+                ], 404);
+            }
+            $edition = Edition::find($editionId);
+            if (!$edition) {
+                return response()->json([
+                    'message' => 'Edition not found'
+                ], 404);
+            }
+            if ($edition->organiser_id != $userId) {
+                return response()->json([
+                    'message' => 'User is not authorized to delete this edition'
+                ], 403);
+            }
+            $edition->delete();
+            return response()->json([
+                'message' => 'Edition deleted success'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Edition not deleted',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
