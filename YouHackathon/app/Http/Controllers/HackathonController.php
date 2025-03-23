@@ -56,7 +56,7 @@ class HackathonController extends Controller
                 ], 404);
             }
             $hackathon->delete();
-    
+
             return response()->json([
                 'message' => 'Hackathon deleted succes',
                 'hackathon' => $hackathon
@@ -78,8 +78,8 @@ class HackathonController extends Controller
             ], 404);
         }
         $hackathon->update([
-            'name'=>$request->name,
-            'description'=>$request->description,
+            'name' => $request->name,
+            'description' => $request->description,
         ]);
         return response()->json([
             'message' => 'Hackathon updated succes',
@@ -95,5 +95,3 @@ class HackathonController extends Controller
         ], 200);
     }
 }
-
-
