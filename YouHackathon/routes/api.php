@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EditionController;
 use App\Http\Controllers\HackathonController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\RoleController;
@@ -56,6 +57,14 @@ Route::put('updatehackathon/{id}', [HackathonController::class, 'updatehackathon
 Route::get('getHackathons', [HackathonController::class, 'getHackathons']);
 
 
+
+
+// =========================-> Edition <-===================================== //
+// ======================================================================= //
+
+Route::post('createEdition/{id}', [EditionController::class, 'createEdition']);
+Route::delete('deleteEdition/{userId}/{editionId}', [EditionController::class, 'deleteEdition']);
+Route::put('updateEdition/{userId}/{editionId}', [EditionController::class, 'updateEdition']);
 
 
 
