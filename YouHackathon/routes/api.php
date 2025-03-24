@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// =========================-> Auth <-===================================== //
+ // =========================-> Auth <-===================================== //
 // ======================================================================= //
 
 Route::post('register', [JWTAuthController::class, 'register']);
@@ -33,7 +33,7 @@ Route::post('login', [JWTAuthController::class, 'login']);
 Route::post('logout', [JWTAuthController::class, 'logout']);
 
 
-// =========================-> Role <-===================================== //
+ // =========================-> Role <-===================================== //
 // ======================================================================= //
 
 Route::post('create', [RoleController::class, 'create']);
@@ -42,8 +42,7 @@ Route::put('update/{id}', [RoleController::class, 'update']);
 Route::get('getAllRole', [RoleController::class, 'getAllRole']);
 
 
-
-// =========================-> User <-===================================== //
+ // =========================-> User <-===================================== //
 // ======================================================================= //
 
 Route::post('addUserRole', [UserController::class, 'addUserRole']);
@@ -51,7 +50,7 @@ Route::post('participierAuxEdition/{userId}/{editionId}', [UserController::class
 Route::post('joinAuxTeam/{userId}/{teamId}', [UserController::class, 'joinAuxTeam']);
 
 
-// =========================-> Hackthon <-===================================== //
+ // =========================-> Hackthon <-===================================== //
 // ======================================================================= //
 
 Route::post('createHackathon', [HackathonController::class, 'createHackathon']);
@@ -62,19 +61,20 @@ Route::get('getHackathons', [HackathonController::class, 'getHackathons']);
 
 
 
-// =========================-> Edition <-===================================== //
+ // =========================-> Edition <-===================================== //
 // ======================================================================= //
 
 Route::post('createEdition/{id}', [EditionController::class, 'createEdition']);
 Route::delete('deleteEdition/{userId}/{editionId}', [EditionController::class, 'deleteEdition']);
 Route::put('updateEdition/{userId}/{editionId}', [EditionController::class, 'updateEdition']);
 
-
-// =========================-> Team <-===================================== //
+ 
+ // =========================-> Team <-===================================== //
 // ======================================================================= //
 Route::post('createTeam/{userId}/{editionId}', [TeamController::class, 'createTeam']);
 Route::delete('deleteTeam/{userId}/{teamId}', [TeamController::class, 'deleteTeam']);
 Route::get('getAllTeam', [TeamController::class, 'getAllTeam']);
+Route::get('getTeamWithUsers', [TeamController::class, 'getTeamWithUsers']);
 
 
 

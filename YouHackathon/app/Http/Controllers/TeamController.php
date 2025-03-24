@@ -92,8 +92,7 @@ class TeamController extends Controller
                     404
                 );
             }
-            if ($team->user_id != $userId)
-            {
+            if ($team->user_id != $userId) {
                 return response()->json([
                     'message' => "this user cant delete this team"
                 ]);
@@ -124,5 +123,29 @@ class TeamController extends Controller
             'teams' => $teams
         ]);
     }
+    public function getTeamWithUsers()
+    {
+        try {
+            $teams = Team::with(['users' => function($query) {
+                $query->select( 'firstname','team_id', 'lastname');
+            }])->get();
+            if( ! $teams)
+            {
+                return response()->json([
+                    'message'=> 'teams not found'
+                ]);
+            }
 
+            return response()->json([
+                'status' => 'success',
+                'teams' => $teams
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
+
