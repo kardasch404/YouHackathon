@@ -26,7 +26,6 @@ class JWTAuthController extends Controller
         $roleUser = Role::where('name', 'user')->first();
 
         if ($roleUser) {
-            // نربط المستخدم مباشرة بالدور `user`
             $user->roles()->attach($roleUser->id);
         }
     
@@ -53,9 +52,8 @@ class JWTAuthController extends Controller
             $user = auth()->user();
             $tokon = JWTAuth::fromUser($user);
             return response()->json([
-                'message' => 'user login seccss',
-                'message' => $user,
-                'token' => $token,
+
+                'token' => $token
             ]);
         }catch (JWTException $e)
         {

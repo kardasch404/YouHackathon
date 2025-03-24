@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Edition;
 use App\Models\Role;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -58,7 +59,6 @@ class UserController extends Controller
     public function participierAuxEdition($userId, $editionId)
     {
         try {
-
             $user = User::find($userId);
             if (!$user) {
                 return response()->json([
@@ -115,6 +115,49 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    public function joinAuxTeam($userId, $teamId)
+    {
+        try {
+
+            $user = User::find($userId);
+            if (! $user) {
+                return response()->json([
+                    'message' => 'user not found'
+                ]);
+            }
+            $isParticipant = $user->roles()->where('name', 'participant')->exists();
+            if (!$isParticipant) {
+                return response()->json([
+                    'message' => 'user not participant'
+                ]);
+            }
+            $team = Team::find($teamId);
+            if (!$team) {
+                return response()->json([
+                    'message' => 'Team not found'
+                ]);
+            }
+            if ($user->team_id) {
+                return response()->json([
+                    'message' => 'User already has a team'
+                ], 400);
+            }
+
+            $user->setAttribute('team_id', $teamId);
+            $user->save();
+
+            return response()->json([
+                'message' => 'user joined seccss',
+                'message' => $user->load('team'),
+                'message' => $team,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'eroro',
+                'message' => $e->getMessage()
+
+            ], 500);
+        }
+    }
 }
-
-
