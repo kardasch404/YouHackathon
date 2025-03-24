@@ -78,6 +78,7 @@ Route::get('getTeamWithUsers', [TeamController::class, 'getTeamWithUsers']);
 // ======================================================================= //
 Route::post('createProject/{userId}', [ProjectController::class, 'createProject']);
 Route::delete('deleteProject/{userId}/{projectId}', [ProjectController::class, 'deleteProject']);
+Route::put('updateProject/{userId}/{projectId}', [ProjectController::class, 'updateProject']);
 
 
 

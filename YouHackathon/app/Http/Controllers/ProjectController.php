@@ -11,84 +11,117 @@ class ProjectController extends Controller
 {
     //
 
-    public function createProject(Request $request,$userId)
+    public function createProject(Request $request, $userId)
     {
-        try{
+        try {
             $user = User::find($userId);
-        if( ! $user)
-        {
+            if (! $user) {
+                return response()->json([
+                    'message' => 'User not found'
+                ]);
+            }
+            $team = Team::where('user_id', $userId)->first();
+            if (!$team) {
+                return response()->json([
+                    'message' => 'User not Owner 4 this team'
+                ]);
+            }
+            $project = Project::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'lien' => $request->lien,
+            ]);
+            // $team->update([
+            //     'project_id'=>$project->id
+            // ]);
+            $team->project_id = $project->id;
+            $team->save();
             return response()->json([
-                'message' => 'User not found'
+                'message' => 'seccs craeting project',
+                'project' => $project,
+                'team' => $team
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+                'message' => 'error craeting project'
             ]);
         }
-        $team = Team::where('user_id', $userId)->first();
-        if(!$team)
-        {
-            return response()->json([
-                'message' => 'User not Owner 4 this team'
-            ]);
-        }
-        $project = Project::create([
-            'title'=> $request->title,
-            'description'=> $request->description,
-            'lien'=> $request->lien,
-        ]);
-        // $team->update([
-        //     'project_id'=>$project->id
-        // ]);
-        $team->project_id = $project->id;
-        $team->save();
-        return response()->json([
-            'message'=> 'seccs craeting project',
-            'project'=> $project,
-            'team'=> $team
-        ]);
-        
-        }catch(\Exception $e)
-        {
-            return response()->json([
-                'error'=> $e->getMessage(),
-                'message'=> 'error craeting project'
-            ]);
-        }
-
     }
 
     public function deleteProject($userId, $projectId)
     {
-        try{
+        try {
             $user = User::find($userId);
-        if(! $user)
-        {
+            if (! $user) {
+                return response()->json([
+                    'message' => 'User not found'
+                ]);
+            }
+            $team = Team::where('user_id', $userId)->first();
+            if (!$team) {
+                return response()->json([
+                    'message' => 'u r not Owner 4 this team !cant delet this project'
+                ]);
+            }
+            $project = Project::find($projectId);
+            if (!$project) {
+                return response()->json([
+                    'message' => 'Project not found'
+                ]);
+            }
+            $team->project_id = null;
+            $team->save();
+            $project->delete();
             return response()->json([
-                'message'=> 'User not found'
+                'message' => 'Project deleted success'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+                'message' => 'error deleting project'
             ]);
         }
-        $team = Team::where('user_id', $userId)->first();
-        if(!$team)
-        {
-            return response()->json([
-                'message' => 'u r not Owner 4 this team !cant delet this project'
+    }
+
+    public function updateProject($userId, $projectId, Request $request)
+    {
+        try {
+            $user = User::find($userId);
+            if (! $user) {
+                return response()->json([
+                    'message' => 'User not found'
+                ]);
+            }
+            $team = Team::where('user_id', $userId)->where('project_id', $projectId)->first();
+            if (!$team) {
+                return response()->json([
+                    'message' => 'u r not Owner 4 this team !cant update this project'
+                ]);
+            }
+            $project = Project::find($projectId);
+            if (!$project) {
+                return response()->json([
+                    'message' => 'Project not found'
+                ]);
+            }
+
+            $project->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'lien' => $request->lien,
             ]);
-        }
-        $project = Project::find($projectId);
-        if(!$project)
-        {
+            $team->project_id = $project->id;
+            $team->save();
             return response()->json([
-                'message' => 'Project not found'
+                'message' => 'seccs updating project',
+                'project' => $project,
+                'team' => $team
             ]);
-        }
-        $team->project_id = null;
-        $team->save();
-        $project->delete();
-        return response()->json([
-            'message' => 'Project deleted success'
-        ]);
-        }catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             return response()->json([
-                'error'=> $e->getMessage(),
-                'message'=> 'error deleting project'
+                'error' => $e->getMessage(),
+                'message' => 'error updating project'
             ]);
         }
     }
