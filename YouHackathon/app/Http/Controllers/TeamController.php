@@ -50,10 +50,11 @@ class TeamController extends Controller
             ], 400);
         }
 
-       $team = Team::create( [
-            'name' => $request->name,  
-            'edition_id' => $editionId
-        ]);
+       $team = new Team();
+       $team->name = $request->name;
+       $team->edition_id = $editionId;
+       $team->user_id = $userId;
+       $team->save();
 
         return response()->json([
             'status' => 'success',
