@@ -26,7 +26,6 @@ class JWTAuthController extends Controller
         $roleUser = Role::where('name', 'user')->first();
 
         if ($roleUser) {
-            // نربط المستخدم مباشرة بالدور `user`
             $user->roles()->attach($roleUser->id);
         }
     
