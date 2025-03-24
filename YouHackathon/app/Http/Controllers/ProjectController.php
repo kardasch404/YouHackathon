@@ -53,4 +53,43 @@ class ProjectController extends Controller
         }
 
     }
+
+    public function deleteProject($userId, $projectId)
+    {
+        try{
+            $user = User::find($userId);
+        if(! $user)
+        {
+            return response()->json([
+                'message'=> 'User not found'
+            ]);
+        }
+        $team = Team::where('user_id', $userId)->first();
+        if(!$team)
+        {
+            return response()->json([
+                'message' => 'u r not Owner 4 this team !cant delet this project'
+            ]);
+        }
+        $project = Project::find($projectId);
+        if(!$project)
+        {
+            return response()->json([
+                'message' => 'Project not found'
+            ]);
+        }
+        $team->project_id = null;
+        $team->save();
+        $project->delete();
+        return response()->json([
+            'message' => 'Project deleted success'
+        ]);
+        }catch(\Exception $e)
+        {
+            return response()->json([
+                'error'=> $e->getMessage(),
+                'message'=> 'error deleting project'
+            ]);
+        }
+    }
 }

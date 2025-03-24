@@ -51,7 +51,6 @@ Route::post('participierAuxEdition/{userId}/{editionId}', [UserController::class
 Route::post('joinAuxTeam/{userId}/{teamId}', [UserController::class, 'joinAuxTeam']);
 Route::post('teamValidate/{userId}/{teamId}', [UserController::class, 'teamValidate']);
 
-
  // =========================-> Hackthon <-===================================== //
 // ======================================================================= //
 
@@ -59,9 +58,6 @@ Route::post('createHackathon', [HackathonController::class, 'createHackathon']);
 Route::delete('deleteHackathon/{id}', [HackathonController::class, 'deleteHackathon']);
 Route::put('updatehackathon/{id}', [HackathonController::class, 'updatehackathon']);
 Route::get('getHackathons', [HackathonController::class, 'getHackathons']);
-
-
-
 
  // =========================-> Edition <-===================================== //
 // ======================================================================= //
@@ -81,6 +77,7 @@ Route::get('getTeamWithUsers', [TeamController::class, 'getTeamWithUsers']);
  // =========================-> Project <-===================================== //
 // ======================================================================= //
 Route::post('createProject/{userId}', [ProjectController::class, 'createProject']);
+Route::delete('deleteProject/{userId}/{projectId}', [ProjectController::class, 'deleteProject']);
 
 
 
