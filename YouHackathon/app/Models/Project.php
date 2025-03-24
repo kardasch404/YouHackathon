@@ -14,7 +14,7 @@ class Project extends Model
     'lien',        
     ];
 
-    public function team ()
+    public function teams()
     {
         return $this->hasOne(Team::class);
     }

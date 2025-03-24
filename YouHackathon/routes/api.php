@@ -3,6 +3,7 @@
 use App\Http\Controllers\EditionController;
 use App\Http\Controllers\HackathonController;
 use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
@@ -77,6 +78,9 @@ Route::delete('deleteTeam/{userId}/{teamId}', [TeamController::class, 'deleteTea
 Route::get('getAllTeam', [TeamController::class, 'getAllTeam']);
 Route::get('getTeamWithUsers', [TeamController::class, 'getTeamWithUsers']);
 
+ // =========================-> Project <-===================================== //
+// ======================================================================= //
+Route::post('createProject/{userId}', [ProjectController::class, 'createProject']);
 
 
 
