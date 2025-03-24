@@ -128,7 +128,7 @@ class TeamController extends Controller
     {
         try {
             $teams = Team::with(['users' => function($query) {
-                $query->select( 'firstname','team_id', 'lastname');
+                $query->select('firstname','lastname', 'email','team_id');
             }])->get();
             if( ! $teams)
             {
@@ -137,6 +137,25 @@ class TeamController extends Controller
                 ]);
             }
 
+            $teams = $teams->map(function($team){
+                $owner = User::select('firstname','lastname','email')
+                ->where('id', $team->user_id)
+                ->first();
+
+                $Users = collect($team->users)->values();
+
+                return [
+                    'id' => $team->id,
+                    'name'=>$team->name,
+                    'created_at' =>$team->created_at,
+                    'updated_at'=>$team->updated_at,
+                    'user_id'=>$owner,
+                    'status'=>$team->status,
+                    'users'=>$Users
+
+                ];
+
+            });
             return response()->json([
                 'status' => 'success',
                 'teams' => $teams

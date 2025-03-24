@@ -60,7 +60,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
-    public function team()
+    public function teams()
     {
         return $this->belongsTo(Team::class);
     }

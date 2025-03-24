@@ -3,6 +3,7 @@
 use App\Http\Controllers\EditionController;
 use App\Http\Controllers\HackathonController;
 use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
@@ -50,7 +51,6 @@ Route::post('participierAuxEdition/{userId}/{editionId}', [UserController::class
 Route::post('joinAuxTeam/{userId}/{teamId}', [UserController::class, 'joinAuxTeam']);
 Route::post('teamValidate/{userId}/{teamId}', [UserController::class, 'teamValidate']);
 
-
  // =========================-> Hackthon <-===================================== //
 // ======================================================================= //
 
@@ -58,9 +58,6 @@ Route::post('createHackathon', [HackathonController::class, 'createHackathon']);
 Route::delete('deleteHackathon/{id}', [HackathonController::class, 'deleteHackathon']);
 Route::put('updatehackathon/{id}', [HackathonController::class, 'updatehackathon']);
 Route::get('getHackathons', [HackathonController::class, 'getHackathons']);
-
-
-
 
  // =========================-> Edition <-===================================== //
 // ======================================================================= //
@@ -77,6 +74,11 @@ Route::delete('deleteTeam/{userId}/{teamId}', [TeamController::class, 'deleteTea
 Route::get('getAllTeam', [TeamController::class, 'getAllTeam']);
 Route::get('getTeamWithUsers', [TeamController::class, 'getTeamWithUsers']);
 
+ // =========================-> Project <-===================================== //
+// ======================================================================= //
+Route::post('createProject/{userId}', [ProjectController::class, 'createProject']);
+Route::delete('deleteProject/{userId}/{projectId}', [ProjectController::class, 'deleteProject']);
+Route::put('updateProject/{userId}/{projectId}', [ProjectController::class, 'updateProject']);
 
 
 
