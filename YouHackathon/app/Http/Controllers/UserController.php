@@ -160,4 +160,34 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    public function teamValidate(Request $request ,$userId, $teamId)
+    {
+       $user = User::find($userId);
+        if (!$user) {
+            return response()->json([
+                'message' => 'user not found'
+            ]);
+        }
+        $isOrganiser = $user->roles()->where('name', 'organiser')->exists();
+        if (!$isOrganiser) {
+            return response()->json([
+                'message' => 'user not organiser not autorized to validate team'
+            ]);
+        }
+        $team = Team::find($teamId);
+        if (!$team) {
+            return response()->json([
+                'message' => 'Team not found'
+            ]);
+        }
+        $team->update([
+            'status' => $request->status
+        ]);
+        return response()->json([
+            'message' => 'team validated'
+            ,'team' => $team
+        ]);
+
+    }
 }

@@ -54,6 +54,7 @@ class TeamController extends Controller
             $team->name = $request->name;
             $team->edition_id = $editionId;
             $team->user_id = $userId;
+            $team->status = 'pending';
             $team->save();
 
             return response()->json([
