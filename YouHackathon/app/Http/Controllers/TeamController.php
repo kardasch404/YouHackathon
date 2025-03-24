@@ -116,5 +116,13 @@ class TeamController extends Controller
         }
     }
 
-    
+    public function getAllTeam()
+    {
+        $teams = Team::all();
+        return response()->json([
+            'message' => 'here we go all team',
+            'teams' => $teams
+        ]);
+    }
+
 }

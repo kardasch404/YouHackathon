@@ -74,6 +74,7 @@ Route::put('updateEdition/{userId}/{editionId}', [EditionController::class, 'upd
 // ======================================================================= //
 Route::post('createTeam/{userId}/{editionId}', [TeamController::class, 'createTeam']);
 Route::delete('deleteTeam/{userId}/{teamId}', [TeamController::class, 'deleteTeam']);
+Route::get('getAllTeam', [TeamController::class, 'getAllTeam']);
 
 
 
