@@ -58,7 +58,6 @@ class UserController extends Controller
     public function participierAuxEdition($userId, $editionId)
     {
         try {
-
             $user = User::find($userId);
             if (!$user) {
                 return response()->json([

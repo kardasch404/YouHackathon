@@ -72,6 +72,7 @@ Route::put('updateEdition/{userId}/{editionId}', [EditionController::class, 'upd
 // =========================-> Team <-===================================== //
 // ======================================================================= //
 Route::post('createTeam/{userId}/{editionId}', [TeamController::class, 'createTeam']);
+Route::delete('deleteTeam/{userId}/{teamId}', [TeamController::class, 'deleteTeam']);
 
 
 

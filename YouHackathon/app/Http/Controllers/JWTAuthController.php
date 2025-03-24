@@ -53,9 +53,8 @@ class JWTAuthController extends Controller
             $user = auth()->user();
             $tokon = JWTAuth::fromUser($user);
             return response()->json([
-                'message' => 'user login seccss',
-                'message' => $user,
-                'token' => $token,
+
+                'token' => $token
             ]);
         }catch (JWTException $e)
         {
