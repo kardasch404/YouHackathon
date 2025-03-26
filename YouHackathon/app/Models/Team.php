@@ -30,4 +30,8 @@ class Team extends Model
     {
         return $this->belongsTo(Juri::class);
     }
+    public function notes()
+    {
+        return $this->belongsTo(Note::class);
+    }
 }

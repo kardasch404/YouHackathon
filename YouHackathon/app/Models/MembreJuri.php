@@ -20,4 +20,8 @@ class MembreJuri extends Model
     {
         return $this->belongsTo(Juri::class);
     }
+    public function notes ()
+    {
+        return $this->hasMany(Note::class);
+    }
 }
