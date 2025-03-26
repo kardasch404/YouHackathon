@@ -4,6 +4,7 @@ use App\Http\Controllers\EditionController;
 use App\Http\Controllers\HackathonController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\MembreJuriController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamController;
@@ -85,6 +86,12 @@ Route::put('updateProject/{userId}/{projectId}', [ProjectController::class, 'upd
  // =========================-> MembreJuri <-===================================== //
 // ======================================================================= //
 Route::post('createCodeAndPassword/{userId}', [MembreJuriController::class, 'createCodeAndPassword']);
+
+
+
+ // =========================-> Note <-===================================== //
+// ======================================================================= //
+Route::post('evaluateTeam/{memberJuriId}/{teamId}', [NoteController::class, 'evaluateTeam']);
 
 
 
