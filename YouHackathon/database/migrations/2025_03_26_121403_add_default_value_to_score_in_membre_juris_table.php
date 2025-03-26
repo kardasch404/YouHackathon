@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('teams', function (Blueprint $table) {
+        Schema::table('membre_juris', function (Blueprint $table) {
             //
-            $table->foreignId('user_id')->constrained('users');
+            $table->integer('score')->default(0)->change(); 
+
         });
     }
 
@@ -22,9 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('teams', function (Blueprint $table) {
+        Schema::table('membre_juris', function (Blueprint $table) {
             //
-            $table->dropColumn(['user_id']);
+                $table->integer('score')->change(); 
+            
         });
     }
 };

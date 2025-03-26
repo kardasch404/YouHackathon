@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('edition_participants', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('edition_id')->constrained();
-            $table->timestamps();
+        Schema::table('membre_juris', function (Blueprint $table) {
+            //
+            $table->dropColumn(['score','comment']);
+
         });
-        
     }
 
     /**
@@ -26,6 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('membre_juris', function (Blueprint $table) {
+            //
+            $table->integer('score');
+            $table->text('comment');
+        });
     }
 };

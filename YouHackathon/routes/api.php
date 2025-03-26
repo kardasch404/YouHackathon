@@ -3,6 +3,7 @@
 use App\Http\Controllers\EditionController;
 use App\Http\Controllers\HackathonController;
 use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\MembreJuriController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamController;
@@ -79,6 +80,11 @@ Route::get('getTeamWithUsers', [TeamController::class, 'getTeamWithUsers']);
 Route::post('createProject/{userId}', [ProjectController::class, 'createProject']);
 Route::delete('deleteProject/{userId}/{projectId}', [ProjectController::class, 'deleteProject']);
 Route::put('updateProject/{userId}/{projectId}', [ProjectController::class, 'updateProject']);
+
+
+ // =========================-> MembreJuri <-===================================== //
+// ======================================================================= //
+Route::post('createCodeAndPassword/{userId}', [MembreJuriController::class, 'createCodeAndPassword']);
 
 
 

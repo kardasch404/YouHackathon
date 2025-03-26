@@ -12,11 +12,16 @@ class MembreJuri extends Model
     protected $fillable = [
         'score',
         'comment',
-        'create_at',
+        'code',
+        'password',
     ];
 
-    public function juri ()
+    public function juris()
     {
         return $this->belongsTo(Juri::class);
+    }
+    public function notes ()
+    {
+        return $this->hasMany(Note::class);
     }
 }
