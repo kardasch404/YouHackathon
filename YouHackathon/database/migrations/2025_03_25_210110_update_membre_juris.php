@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-
-            $table->foreignId('team_id')->nullable()->constrained('teams');
+        //
+        Schema::table('membre_juris', function (Blueprint $table) {
+            $table->string('code')->after('juri_id');
+            $table->string('password')->after('code');
         });
     }
 
@@ -23,9 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn('team_id');
+        //
+        Schema::table('membre_juris', function (Blueprint $table) {
+            $table->dropColumn('code');
+            $table->dropColumn('password');
         });
     }
 };
